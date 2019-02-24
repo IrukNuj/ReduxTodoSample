@@ -26,7 +26,7 @@ store.dispatch(removeTodo(1));
 unsubscribe();
 
 const App = () => (
-  <View>
+  <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
     <Text>Hello Redux!</Text>
   </View>
 );
