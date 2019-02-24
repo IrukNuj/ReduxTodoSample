@@ -1,21 +1,34 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View } from 'react-native';
+import { createStore } from 'redux';
+import { addTodo, removeTodo } from "./actions";
+import todoApp from './reducers';
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
-    );
-  }
-}
+const store = createStore(
+  todoApp,
+);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+// Log the initial state
+console.log(store.getState());
+
+// Every time the state changes, log it
+// Note that subscribe() returns a function for unregistering the listener
+const unsubscribe = store.subscribe(() => console.log(store.getState()));
+
+// Dispatch some actions
+store.dispatch(addTodo('Learn about actions'));
+store.dispatch(addTodo('Learn about reducers'));
+store.dispatch(addTodo('Learn about store'));
+store.dispatch(removeTodo(0));
+store.dispatch(removeTodo(1));
+
+// Stop listening to state updates
+unsubscribe();
+
+const App = () => (
+  <View>
+    <Text>Hello Redux!</Text>
+  </View>
+);
+
+export default App;
