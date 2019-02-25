@@ -3,9 +3,7 @@ import {
   REMOVE_TODO,
 } from './actions';
 
-const initialState = [];
-
-const todoApp = (state = initialState, action) => {
+const todoApp = (state = [], action) => {
   switch (action.type) {
     case ADD_TODO:
       return [
