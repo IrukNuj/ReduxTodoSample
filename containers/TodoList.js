@@ -5,7 +5,7 @@ import {
 import TodoList from '../components/MainScreen/TodoList';
 
 const mapStateToProps = state => ({
-  todos: state,
+  todos: state.todos,
 });
 
 const mapDispatchToProps = dispatch => ({

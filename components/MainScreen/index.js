@@ -1,33 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View } from 'react-native';
-import AddTodo from '../../containers/Form';
+import Form from '../../containers/Form';
 import TodoList from '../../containers/TodoList';
 
-class MainScreen extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      text: '',
-    };
-  }
-
-  onChangeText = text => this.setState({ text });
-
-  render() {
-    const {
-      text,
-    } = this.state;
-
-    return (
-      <View>
-        <AddTodo
-          text={text}
-          onChangeText={this.onChangeText}
-        />
-        <TodoList />
-      </View>
-    );
-  }
-}
+const MainScreen = () => (
+  <View>
+    <Form />
+    <TodoList />
+  </View>
+);
 
 export default MainScreen;

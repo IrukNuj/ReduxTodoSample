@@ -1,11 +1,10 @@
+import { combineReducers } from "redux";
 import {
-  ADD_TODO,
+  ADD_TODO, CHANGE_INPUT,
   REMOVE_TODO,
 } from './actions';
 
-const initialState = [];
-
-const todoApp = (state = initialState, action) => {
+const todos = (state = [], action) => {
   switch (action.type) {
     case ADD_TODO:
       return [
@@ -21,5 +20,22 @@ const todoApp = (state = initialState, action) => {
       return state;
   }
 };
+
+const form = (state = {text: ''}, action) => {
+  switch (action.type) {
+    case CHANGE_INPUT:
+      return {
+        ...state,
+        text: action.text,
+      };
+    default:
+      return state;
+  }
+};
+
+const todoApp = combineReducers({
+  todos,
+  form,
+});
 
 export default todoApp;

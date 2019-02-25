@@ -25,26 +25,27 @@ const styles = StyleSheet.create({
   },
 });
 
-const Form = ({ text, addTodo, onChangeText }) => {
-  const onPress = () => {
+const Form = ({ text, changeInput, addTodo }) => {
+  const submitAndReset = () => {
     if (!text) {
       return;
     }
     addTodo(text);
-    onChangeText('');
+    changeInput('');
   };
 
+  console.log(text);
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.input}
         value={text}
-        onChangeText={onChangeText}
-        onSubmitEditing={onPress}
+        onChangeText={changeInput}
+        onSubmitEditing={submitAndReset}
       />
       <TouchableOpacity
         style={styles.addButton}
-        onPress={onPress}
+        onPress={submitAndReset}
       >
         <Text>ADD</Text>
       </TouchableOpacity>
@@ -54,7 +55,7 @@ const Form = ({ text, addTodo, onChangeText }) => {
 
 Form.propTypes = {
   text: PropTypes.string.isRequired,
-  onChangeText: PropTypes.func.isRequired,
+  changeInput: PropTypes.func.isRequired,
   addTodo: PropTypes.func.isRequired,
 };
 
