@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
   StyleSheet,
@@ -9,27 +9,24 @@ import {
 } from 'react-native';
 
 const styles = StyleSheet.create({
-  input: {
+  container: {
     margin: 5,
-    padding: 10,
+  },
+  input: {
+    marginBottom: 5,
+    padding: 5,
     borderWidth: 1,
   },
   addButton: {
-    margin: 5,
-    padding: 10,
-    backgroundColor: '#000',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  addButtonText: {
-    color: '#fff',
+    padding: 5,
+    borderWidth: 1,
   },
 });
 
-class Form extends Component {
-  onPress = () => {
-    const { text, addTodo, onChangeText } = this.props;
-
+const Form = ({ text, addTodo, onChangeText }) => {
+  const onPress = () => {
     if (!text) {
       return;
     }
@@ -37,26 +34,23 @@ class Form extends Component {
     onChangeText('');
   };
 
-  render() {
-    const { text, onChangeText } = this.props;
-    return (
-      <View>
-        <TextInput
-          style={styles.input}
-          value={text}
-          onChangeText={onChangeText}
-          onSubmitEditing={this.onPress}
-        />
-        <TouchableOpacity
-          style={styles.addButton}
-          onPress={this.onPress}
-        >
-          <Text style={styles.addButtonText}>ADD</Text>
-        </TouchableOpacity>
-      </View>
-    );
-  }
-}
+  return (
+    <View style={styles.container}>
+      <TextInput
+        style={styles.input}
+        value={text}
+        onChangeText={onChangeText}
+        onSubmitEditing={onPress}
+      />
+      <TouchableOpacity
+        style={styles.addButton}
+        onPress={onPress}
+      >
+        <Text>ADD</Text>
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 Form.propTypes = {
   text: PropTypes.string.isRequired,

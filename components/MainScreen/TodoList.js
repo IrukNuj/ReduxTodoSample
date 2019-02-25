@@ -1,33 +1,25 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { FlatList } from 'react-native';
 import Todo from './Todo';
 
-class TodoList extends Component {
-  renderItem = ({ item }) => {
-    const { removeTodo } = this.props;
+const TodoList = ({ todos, removeTodo }) => {
+  const renderItem = ({ item }) => (
+    <Todo
+      todo={item}
+      removeTodo={removeTodo}
+    />
+  );
 
-    return (
-      <Todo
-        todo={item}
-        removeTodo={removeTodo}
-      />
-    );
-  };
-
-  render() {
-    const { todos } = this.props;
-
-    return (
-      <FlatList
-        data={todos}
-        extraData={todos.length}
-        renderItem={this.renderItem}
-        keyExtractor={todo => todo.id}
-      />
-    );
-  }
-}
+  return (
+    <FlatList
+      data={todos}
+      extraData={todos.length}
+      renderItem={renderItem}
+      keyExtractor={todo => todo.id}
+    />
+  );
+};
 
 TodoList.propTypes = {
   todos: PropTypes.arrayOf(
